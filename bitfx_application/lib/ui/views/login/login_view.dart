@@ -5,6 +5,7 @@ import 'package:bitfx_application/ui/widgets/route_paths.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/textBox.dart';
 
@@ -30,8 +31,8 @@ class _LoginViewState extends State<LoginView> {
             child: DropShadowImage(
               image: Image.asset(
                 'assets/bit_icon.png',
-                width: 200,
-                height: 200,
+                width: 120,
+                height: 120,
                 color: mainCyan,
               ),
               borderRadius: 0,
@@ -76,24 +77,21 @@ class _LoginViewState extends State<LoginView> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
+             
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: Text(
-                  'Forgot password',
-                  style: TextStyle(color: mainCyan),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                padding: EdgeInsets.fromLTRB(95, 15, 30, 10),
                 child: RichText(
                   text: TextSpan(
-                    text: 'New User? ',
-                    style: TextStyle(color: mainCyan),
+                    text: 'Don\'t have an account? ' ,
+                    style: GoogleFonts.antic(
+                          textStyle:TextStyle(color: mainCyan, fontSize: 15)),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'SIGNUP',
-                        style: TextStyle(
+                        style: GoogleFonts.antic(
+                          textStyle: TextStyle(                        
                             fontWeight: FontWeight.bold, color: mainCyan),
+                        ),               
                         recognizer: new TapGestureRecognizer()
                           ..onTap = () =>
                               Navigator.pushNamed(context, RoutePaths.signup),

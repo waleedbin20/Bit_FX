@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.grey,
+      
       borderRadius: BorderRadius.circular(20),
       elevation: 25,
       shadowColor: mainCyan,

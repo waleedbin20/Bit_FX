@@ -1,4 +1,5 @@
 
+import 'package:bitfx_application/ui/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final NavController navController = Get.put(NavController());
 
   List<Widget> bodyContent = [
-    LoginView()
+    LoginView(),
+    LoginView(),
+    LoginView(),
+    LoginView(),
+    ProfileView()
 
   
   ];

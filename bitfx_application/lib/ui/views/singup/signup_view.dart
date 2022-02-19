@@ -2,9 +2,11 @@
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/viewmodels/login/login_view_model.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../widgets/route_paths.dart';
 import '../../widgets/textBox.dart';
 
 class SignupView extends StatefulWidget {
@@ -25,11 +27,11 @@ class _SignupViewState extends State<SignupView> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(40, 50, 30, 10),
+              padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
               child: Image(
                 image: AssetImage('assets/bit_icon.png'),
-                height: 200,
-                width: 200,
+                height: 120,
+                width: 120,
                 color: mainCyan,
               ),
             ),
@@ -45,7 +47,7 @@ class _SignupViewState extends State<SignupView> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(50, 3, 30, 10),
+              padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
               child: TextBoxWidget(
                 text: "Email",
                 iconDesign: Icon(
@@ -56,7 +58,7 @@ class _SignupViewState extends State<SignupView> {
               ),
             ),
             const Padding(
-                padding: EdgeInsets.fromLTRB(50, 3, 30, 10),
+                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
                 child: TextBoxWidget(
                   text: "Password",
                   iconDesign: Icon(
@@ -66,7 +68,7 @@ class _SignupViewState extends State<SignupView> {
                   errorMessage: 'Enter your password',
                 )),
             Padding(
-                padding: EdgeInsets.fromLTRB(50, 3, 30, 10),
+                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
                 child: TextBoxWidget(
                   text: "Confirm Password",
                   iconDesign: Icon(
@@ -76,23 +78,36 @@ class _SignupViewState extends State<SignupView> {
                   errorMessage: '',
                 )),
             SizedBox(
-              height: 20,
+              height: 19,
             ),
             Padding(
-                padding: EdgeInsets.fromLTRB(50, 3, 30, 10),
+                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
                 child: Button(textValue: "Signup", onPressed: () {})),
 
             SizedBox(
-              height: 20,
+              height: 15,
             ),
-           
+
             Padding(
-                padding: EdgeInsets.fromLTRB(50, 5, 30, 10),
-                child: Button(
-                    textValue: "Login",
-                    onPressed: () {
-                      viewModel.login(context);
-                    })),
+                padding: EdgeInsets.fromLTRB(43, 15, 30, 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Have have an account? ' ,
+                    style: TextStyle(color: mainCyan),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Login',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: mainCyan),
+                        recognizer: new TapGestureRecognizer()
+                          ..onTap = () =>
+                              Navigator.pushNamed(context, RoutePaths.login),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+           
           ],
         ),
         backgroundColor: Colors.black,

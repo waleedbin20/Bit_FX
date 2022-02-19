@@ -1,6 +1,7 @@
 
 import 'package:bitfx_application/ui/views/home/home_view.dart';
 import 'package:bitfx_application/ui/views/login/login_view.dart';
+import 'package:bitfx_application/ui/views/profile/profile_view.dart';
 import 'package:bitfx_application/ui/views/singup/signup_view.dart';
 import 'package:bitfx_application/ui/views/splash/splash_view.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
@@ -21,6 +22,9 @@ class Router {
 
       case RoutePaths.bottomNavBar:
         return MaterialPageRoute(builder: (_) =>  BottomNavBar(), settings: settings);
+
+      case RoutePaths.profilePage:
+        return MaterialPageRoute(builder: (_) => ProfileView(), settings: settings);
       
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

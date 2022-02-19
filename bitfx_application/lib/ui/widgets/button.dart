@@ -13,9 +13,9 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.grey,
-      borderRadius: BorderRadius.circular(20),
-      elevation: 25,
+      //color: mainCyan,
+      borderRadius: BorderRadius.circular(30),
+      elevation: 20,
       shadowColor: mainCyan,
       child: ElevatedButton(
         onPressed: () {
@@ -30,7 +30,7 @@ class Button extends StatelessWidget {
               color:mainCyan,
               borderRadius: BorderRadius.circular(20)),
           child: Container(
-            height: 1.1 * (MediaQuery.of(context).size.height / 20),
+            height: 1.2 * (MediaQuery.of(context).size.height / 20),
             width: 4 * (MediaQuery.of(context).size.width / 10),
             alignment: Alignment.center,
             child: Text(

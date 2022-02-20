@@ -1,4 +1,5 @@
 
+import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
 import 'package:bitfx_application/ui/views/home/home_view.dart';
 import 'package:bitfx_application/ui/views/login/login_view.dart';
 import 'package:bitfx_application/ui/views/profile/profile_view.dart';
@@ -19,12 +20,17 @@ class Router {
       
       case RoutePaths.signup:
         return MaterialPageRoute(builder: (_) => const SignupView(), settings: settings);
+      
 
       case RoutePaths.bottomNavBar:
         return MaterialPageRoute(builder: (_) =>  BottomNavBar(), settings: settings);
+      
 
       case RoutePaths.profilePage:
         return MaterialPageRoute(builder: (_) => ProfileView(), settings: settings);
+      
+       case RoutePaths.calculator:
+        return MaterialPageRoute(builder: (_) => CalculatorView(), settings: settings);
       
       default:
         return MaterialPageRoute(builder: (_) => Scaffold(

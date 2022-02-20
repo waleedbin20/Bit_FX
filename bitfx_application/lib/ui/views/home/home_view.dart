@@ -1,4 +1,5 @@
 
+import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
 import 'package:bitfx_application/ui/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -18,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   List<Widget> bodyContent = [
     LoginView(),
     LoginView(),
-    LoginView(),
+    CalculatorView(),
     LoginView(),
     ProfileView()
 

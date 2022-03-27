@@ -1,33 +1,31 @@
-class CalculatorViewModel {
+import 'package:flutter/material.dart';
 
-  final String pairName;
-  final double accountBalance;
-  final double risk;
-  final double stopLoss;
+class CalculatorViewModel extends ChangeNotifier {
+  TextEditingController accBal = TextEditingController();
 
- 
-  CalculatorViewModel(this.pairName, this.accountBalance, this.risk, this.stopLoss,);
+  TextEditingController riskP = TextEditingController();
+  TextEditingController stoploss = TextEditingController();
 
-    ForexCalculation() {    
-
-    int lotSize = 0;
-
-    switch (pairName) {
-      case 'EURUSD':
-        return "${lotSize + 4}";
-
-      case 'GBPUSD':
-        return "${lotSize + 5}";
-
-      case 'NZDUSD':
-        return "${lotSize + 6}";
-
-      default:
-        return lotSize;
-    }
-  }
- 
   
+  double _rslt = 0;
+  String _result = '';
+  String get result => _result;
 
+  void calculate() {
+    double? x = double.tryParse(accBal.text) ?? 0;
+    double? y = double.tryParse(riskP.text) ?? 0;
+    double? z = double.tryParse(stoploss.text) ?? 0;
+    double r = y * 0.01;
+    _rslt = (x * r / z) / 10;
+    _result = ('Lot Size: ' + _rslt.toStringAsFixed(2));
+    notifyListeners();
+  }
 
+  clearTextInput(){
+ 
+    accBal.clear();
+    riskP.clear();
+    stoploss.clear();
+ 
+  }
 }

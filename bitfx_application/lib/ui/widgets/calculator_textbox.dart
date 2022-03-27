@@ -1,5 +1,6 @@
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CalculatorTextBox extends StatelessWidget {
   final String text;
@@ -42,8 +43,12 @@ class CalculatorTextBox extends StatelessWidget {
                     Container(
                         width: 70.0,
                         height: 10,
-                        child: TextField(
+                        child: TextFormField(
                             controller: controller,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                            ],
                             cursorColor: Colors.black,
                             style: TextStyle(
                                 fontSize: 20.0,

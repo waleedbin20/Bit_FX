@@ -36,7 +36,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                 height: MediaQuery.of(context).size.height * 0.5,
                 child: Expanded(
                   child: DropShadowImage(
-                      image: Image.asset('assets/bit_icon.png',),
+                      image: Image.asset('assets/icon/icon.png',),
                     borderRadius: 10,
                     blurRadius: 4,
                     offset: Offset(1, 1),

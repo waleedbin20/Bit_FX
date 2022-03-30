@@ -30,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
             padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
             child: DropShadowImage(
               image: Image.asset(
-                'assets/bit_icon.png',
+                'assets/icon/icon.png',
                 width: 120,
                 height: 120,
                 color: mainCyan,

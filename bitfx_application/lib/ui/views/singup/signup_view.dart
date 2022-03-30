@@ -29,7 +29,7 @@ class _SignupViewState extends State<SignupView> {
             Padding(
               padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
               child: Image(
-                image: AssetImage('assets/bit_icon.png'),
+                image: AssetImage('assets/icon/icon.png'),
                 height: 120,
                 width: 120,
                 color: mainCyan,

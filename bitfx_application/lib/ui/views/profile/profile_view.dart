@@ -3,7 +3,6 @@ import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/ui/widgets/profile_menu.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -32,22 +31,23 @@ class _ProfileViewState extends State<ProfileView> {
 
               ProfileMenu(
                 text: "My Account",
-                icon: "bitfx.png",
+                icon: "assets/icon/icon.png",
                 press: () => {},
               ),
               ProfileMenu(
                 text: "Follow US",
-                icon: "assets/bitfx.png",
+                icon: "assets/icon/icon.png",
                 press: () => {},
               ),
               ProfileMenu(
                 text: "Support",
-                icon: "assets/bitfx.png",
-                press: () => {},
+                icon: "assets/icon/icon.png",
+                press: () =>
+                    {Navigator.pushNamed(context, RoutePaths.formPage)},
               ),
               ProfileMenu(
                 text: "Privacy",
-                icon: "assets/bitfx.png",
+                icon: "assets/icon/icon.png",
                 press: () => {},
               ),
 
@@ -57,7 +57,6 @@ class _ProfileViewState extends State<ProfileView> {
                   textValue: "Log Out",
                   onPressed: () {
                     Navigator.pushNamed(context, RoutePaths.login);
-                    
                   }),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],

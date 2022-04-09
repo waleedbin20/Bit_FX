@@ -38,14 +38,12 @@ class ProfileMenu extends StatelessWidget {
               ),
               SizedBox(width: 20),
               Expanded(
-
                 child: Text(
                   text,
                   style: GoogleFonts.antic(
                     textStyle: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
-                      
                     ),
                   ),
                 ),

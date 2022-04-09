@@ -1,5 +1,3 @@
-
-
 class RoutePaths {
   static const String home = "home";
   static const String login = "login";
@@ -10,8 +8,8 @@ class RoutePaths {
   static const String signalScreen = "signalScreen";
   static const String courses = "courses";
   static const String calculator = "calculator";
-  static const String economicCalendar= "economicCalendar";
+  static const String economicCalendar = "economicCalendar";
   static const String profilePage = "profilePage";
   static const String bottomNavBar = "bottomNavBar";
-
+  static const String formPage = "formPage";
 }

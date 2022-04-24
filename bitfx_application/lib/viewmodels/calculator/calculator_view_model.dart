@@ -12,7 +12,7 @@ class CalculatorViewModel extends ChangeNotifier {
 
   String get result => _result;
 
-  String _dropdownValue = 'EUR/USD';
+  String _dropdownValue = 'EURUSD';
 
   String get dropdownValue => _dropdownValue;
 
@@ -34,19 +34,19 @@ class CalculatorViewModel extends ChangeNotifier {
   void calulateAccordingToPairs() {
     var forexPair = dropdownValue;
     switch (forexPair) {
-      case 'EUR/USD':
-      case 'GBP/USD':
-      case 'NZD/USD':
+      case 'EURUSD':
+      case 'GBPUSD':
+      case 'NZDUSD':
         {
           calculate(10);
         }
         break;
-      case 'XAU/USD':
+      case 'XAUUSD':
         {
           calculate(10);
         }
         break;
-      case 'GBP/JPY':
+      case 'GBPJPY':
         {
           calculate(1000);
         }

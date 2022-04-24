@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 
 class formFields extends StatelessWidget {
   final String fieldName;
-
   final int characterLength;
   final int forrmLines;
   const formFields(
       {Key? key,
       required this.fieldName,
-    
       required this.characterLength,
       required this.forrmLines})
       : super(key: key);
@@ -21,7 +19,6 @@ class formFields extends StatelessWidget {
       child: Container(
           width: MediaQuery.of(context).size.width * 0.7,
           child: TextFormField(
-        
             style: TextStyle(
                 color: mainCyan, fontSize: 25, fontWeight: FontWeight.w300),
             initialValue: '',

@@ -151,6 +151,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -158,6 +159,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
+=======
+>>>>>>> origin/main
   flutter_svg:
     dependency: "direct dev"
     description:
@@ -175,6 +178,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -182,6 +186,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "10.1.0"
+=======
+>>>>>>> origin/main
   get:
     dependency: "direct dev"
     description:

@@ -11,7 +11,6 @@ class CalculatorTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -31,32 +30,34 @@ class CalculatorTextBox extends StatelessWidget {
                   Icons.attach_money_outlined,
                   size: 30,
                 ),
-                Text(text,
-                    style: TextStyle(
-                        fontSize: 20.0,
-                        height: 1.0,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500)),
+                Container(
+                  width: 150,
+                  child: Text(text,
+                      style: TextStyle(
+                          fontSize: 20.0,
+                          height: 1.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500)),
+                ),
                 SizedBox(width: 40),
                 Row(
                   children: [
                     Container(
-                        width: 100.0,
+                        width: 140.0,
                         height: 10,
                         child: TextFormField(
                             controller: controller,
-                            
                             keyboardType: TextInputType.number,
                             inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
                             ],
                             cursorColor: Colors.black,
                             style: TextStyle(
                                 fontSize: 20.0,
                                 height: 1.0,
                                 color: Colors.black,
-                                fontWeight: FontWeight.w500
-                                )))
+                                fontWeight: FontWeight.w500)))
                   ],
                 ),
               ],
@@ -67,5 +68,3 @@ class CalculatorTextBox extends StatelessWidget {
     );
   }
 }
-
-

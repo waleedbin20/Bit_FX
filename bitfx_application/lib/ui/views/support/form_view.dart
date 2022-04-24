@@ -14,32 +14,6 @@ class FormView extends StatefulWidget {
 }
 
 class _FormViewState extends State<FormView> {
-
-sendMail() async {
-    String username = 'bitfxcoachables@gmail.com';
-    String password = 'enteryourpassword';
-
-    final smtpServer = gmail(username, password);
-    final message = Message()
-      ..from = Address(username)
-      ..recipients.add('bitfxcoachables@gmail.com')
-
-      ..subject = 'Mail using mailer package :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html = "<h1>Write the content here</h1>\n<p>Hey! its easy use html tags for alignments</p>";
-
-    try {
-      final sendReport = await send(message, smtpServer);
-      print('Message sent: ' + sendReport.toString());
-      // Toast.show("You have clicked the Button! and email sent", context, duration: 3, gravity:  Toast.CENTER);
-    } on MailerException catch (e) {
-      print('Message not sent.');
-      for (var p in e.problems) {
-        print('Problem: ${p.code}: ${p.msg}');
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -67,7 +41,6 @@ sendMail() async {
                     formFields(
                         fieldName: "Email", characterLength: 20, forrmLines: 1),
                     formFields(
-                    
                         fieldName: "Message",
                         characterLength: 100,
                         forrmLines: 1),
@@ -77,8 +50,7 @@ sendMail() async {
                     Button(
                         textValue: "Submit",
                         onPressed: () {
-                          sendMail();
-                         
+                          sendEmail();
                         })
                   ],
                 ),
@@ -87,37 +59,34 @@ sendMail() async {
   }
 }
 
+void sendEmail() async {
+  final user = await AuthService.SignIn();
 
+  if (user == null) return;
+  final email = user.email;
+  final auth = await user.authentication;
+  final token = auth.accessToken;
 
+  print('Authenticated: $email');
 
-// void sendEmail() async {
-//   final user = await AuthService.SignIn();
+  AuthService.SignOut();
+  final smtpServer = gmailSaslXoauth2(email, token!);
 
-//   if (user == null) return;
-//   final email = user.email;
-//   final auth = await user.authentication;
-//   final token = auth.accessToken;
+  // Create our message.
+  final message = Message()
+    ..from = Address(email, 'Rockyy')
+    ..recipients.add('waleed.binasad19@gmail.com')
+    ..ccRecipients.addAll(['waleed.binasad19@gmail.com'])
+    ..subject = 'This is a test email :: 😀 :: ${DateTime.now()}'
+    ..text = 'Hello, Thank you for contacting me.\nWelcome to my course.';
 
-//   print('Authenticated: $email');
-
-//   AuthService.SignOut();
-//   final smtpServer = gmailSaslXoauth2(email, token!);
-
-//   // Create our message.
-//   final message = Message()
-//     ..from = Address(email, 'Rockyy')
-//     ..recipients.add('bitfxcoachables@gmail.com')
-//     ..ccRecipients.addAll(['bitfxcoachables@gmail.com'])
-//     ..subject = 'This is a test email :: 😀 :: ${DateTime.now()}'
-//     ..text = 'Hello, Thank you for contacting me.\nWelcome to my course.';
-
-//   try {
-//     final sendReport = await send(message, smtpServer);
-//     print('Message sent: ' + sendReport.toString());
-//   } on MailerException catch (e) {
-//     print('Message not sent.');
-//     for (var p in e.problems) {
-//       print('Problem: ${p.code}: ${p.msg}');
-//     }
-  // }
-// }
+  try {
+    final sendReport = await send(message, smtpServer);
+    print('Message sent: ' + sendReport.toString());
+  } on MailerException catch (e) {
+    print('Message not sent.');
+    for (var p in e.problems) {
+      print('Problem: ${p.code}: ${p.msg}');
+    }
+  }
+}

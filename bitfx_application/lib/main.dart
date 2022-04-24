@@ -1,11 +1,17 @@
 import 'package:bitfx_application/router.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
 import 'package:flutter/material.dart' hide Router;
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'router.dart';
 
-void main() {
+ void main() {
+
+ WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  
   runApp(const MyApp());
 }
 

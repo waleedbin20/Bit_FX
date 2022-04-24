@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "202453581618",
+    "project_id": "bitfx-e32fb",
+    "storage_bucket": "bitfx-e32fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202453581618:android:ceecff02f8605de046612b",
+        "android_client_info": {
+          "package_name": "com.example.bitfx_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202453581618-utusjtphm8e0hqh6eq6qbrtj4n5avivt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjvbb_YhonxZGOvq97WpJDnWeTJp6B7lM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202453581618-utusjtphm8e0hqh6eq6qbrtj4n5avivt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -40,6 +40,12 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
+  mailer: ^5.1.0
+  google_sign_in: ^5.0.0
+  webview_flutter: ^3.0.2
+  font_awesome_flutter: ^10.1.0
+  url_launcher: ^6.0.20
+  image_picker: ^0.8.5
   
 
 dev_dependencies:
@@ -56,18 +62,9 @@ dev_dependencies:
   auto_route: ^3.2.2
   get: ^4.6.1
   google_fonts: ^2.3.1
+  flutter_svg: ^1.0.3
   
-
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/bit_icon.png"
-  adaptive_icon_background: "#000000"
-
-
-
-
+  
 
 flutter:
   generate: true
@@ -78,7 +75,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
    
-    - assets/bit_icon.png
+    - assets/icon/icon.png
     - assets/splashscreen.png
 
 

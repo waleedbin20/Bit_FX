@@ -18,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       duration: 700,
-      splash: 'assets/bit_icon.png',
+      splash: 'assets/icon/icon.png',
       nextScreen: WelcomeView(),
       splashTransition: SplashTransition.slideTransition,
       backgroundColor: mainGrey,

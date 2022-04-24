@@ -1,6 +1,7 @@
 import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
 import 'package:bitfx_application/ui/views/home/home_view.dart';
 import 'package:bitfx_application/ui/views/login/login_view.dart';
+import 'package:bitfx_application/ui/views/profile/follow_view.dart';
 import 'package:bitfx_application/ui/views/profile/profile_view.dart';
 import 'package:bitfx_application/ui/views/singup/signup_view.dart';
 import 'package:bitfx_application/ui/views/splash/splash_view.dart';
@@ -43,6 +44,10 @@ class Router {
       case RoutePaths.economicCalendar:
         return MaterialPageRoute(
             builder: (_) => EconomicCalendarView(), settings: settings);
+
+      case RoutePaths.followUs:
+        return MaterialPageRoute(
+            builder: (_) => FollowUs(), settings: settings);
 
       default:
         return MaterialPageRoute(

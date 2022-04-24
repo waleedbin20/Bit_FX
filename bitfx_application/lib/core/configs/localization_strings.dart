@@ -26,4 +26,5 @@ class LocalizationStrings {
   static const String lotSize = "lotSize";
   static const String stopLoss = "stopLoss";
   static const String calculate = "calculate";
+  static const String followUs = "followUs";
 }

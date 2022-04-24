@@ -46,6 +46,7 @@ dependencies:
   flutter_svg: ^1.0.3
   image_picker: ^0.8.5
   url_launcher: ^6.0.20
+  font_awesome_flutter: ^10.1.0
   
 
 dev_dependencies:

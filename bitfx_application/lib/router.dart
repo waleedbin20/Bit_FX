@@ -6,6 +6,7 @@ import 'package:bitfx_application/ui/views/singup/signup_view.dart';
 import 'package:bitfx_application/ui/views/splash/splash_view.dart';
 import 'package:bitfx_application/ui/views/support/form_view.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
+import 'package:bitfx_application/ui/views/calendar/econmic_view.dart';
 import 'package:flutter/material.dart';
 
 class Router {
@@ -13,15 +14,15 @@ class Router {
     switch (settings.name) {
       case RoutePaths.login:
         return MaterialPageRoute(
-            builder: (_) => const LoginView(), settings: settings);
+            builder: (_) => LoginView(), settings: settings);
 
       case RoutePaths.splash:
         return MaterialPageRoute(
-            builder: (_) => const SplashView(), settings: settings);
+            builder: (_) => SplashView(), settings: settings);
 
       case RoutePaths.signup:
         return MaterialPageRoute(
-            builder: (_) => const SignupView(), settings: settings);
+            builder: (_) => SignupView(), settings: settings);
 
       case RoutePaths.bottomNavBar:
         return MaterialPageRoute(
@@ -38,6 +39,10 @@ class Router {
       case RoutePaths.formPage:
         return MaterialPageRoute(
             builder: (_) => FormView(), settings: settings);
+
+      case RoutePaths.economicCalendar:
+        return MaterialPageRoute(
+            builder: (_) => EconomicCalendarView(), settings: settings);
 
       default:
         return MaterialPageRoute(

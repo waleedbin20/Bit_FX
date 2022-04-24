@@ -12,7 +12,7 @@ class CalculatorViewModel extends ChangeNotifier {
 
   String get result => _result;
 
-  String _dropdownValue = 'EURUSD';
+  String _dropdownValue = 'GBP/USD';
 
   String get dropdownValue => _dropdownValue;
 
@@ -34,23 +34,69 @@ class CalculatorViewModel extends ChangeNotifier {
   void calulateAccordingToPairs() {
     var forexPair = dropdownValue;
     switch (forexPair) {
-      case 'EURUSD':
-      case 'GBPUSD':
-      case 'NZDUSD':
+      case 'EUR/USD':
+      case 'GBP/USD':
+      case 'NZD/USD':
+      case 'AUD/USD':
         {
           calculate(10);
         }
         break;
-      case 'XAUUSD':
+      case 'XAU/USD':
         {
           calculate(10);
         }
         break;
-      case 'GBPJPY':
+      case 'GBP/JPY':
+      case 'USD/JPY':
+      case 'EUR/JPY':
+      case 'AUD/JPY':
+      case 'CAD/JPY':
+      case 'NZD/JPY':
+      case 'CHF/JPY':
         {
           calculate(1000);
         }
         break;
+      case 'USD/CAD':
+      case 'NZD/CAD':
+      case 'AUD/CAD':
+      case 'GBP/CAD':
+      case 'EUR/CAD':
+        {
+          calculate(10);
+        }
+        break;
+      case 'USD/CHF':
+      case 'EUR/CHF':
+      case 'CAD/CHF':
+      case 'GBP/CHF':
+      case 'AUD/CHF':
+      case 'NZD/CHF':
+        {
+          calculate(10);
+        }
+        break;
+      case 'GBP/AUD':
+      case 'EUR/AUD':
+        {
+          calculate(10);
+        }
+        break;
+      case 'GBP/NZD':
+      case 'EUR/NZD':
+      case 'AUD/NZD':
+        {
+          calculate(10);
+        }
+        break;
+      case 'EUR/GBP':
+      case 'USD/SGD':
+        {
+          calculate(10);
+        }
+        break;
+
       default:
         {
           print("Invalid choice");

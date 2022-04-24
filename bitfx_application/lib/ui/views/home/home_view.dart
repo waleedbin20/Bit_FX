@@ -1,6 +1,6 @@
-
 import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
 import 'package:bitfx_application/ui/views/profile/profile_view.dart';
+import 'package:bitfx_application/ui/views/calendar/econmic_view.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:get/get.dart';
@@ -20,10 +20,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     LoginView(),
     LoginView(),
     CalculatorView(),
-    LoginView(),
+    EconomicCalendarView(),
     ProfileView()
-
-  
   ];
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
@@ -44,7 +42,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Icon(Icons.book_online_outlined, size: 30, color: mainGrey),
           Icon(Icons.calculate_sharp, size: 30, color: mainGrey),
           Icon(Icons.calendar_today, size: 30, color: mainGrey),
-          Icon(Icons.supervised_user_circle_outlined, size: 30,color: mainGrey),
+          Icon(Icons.supervised_user_circle_outlined,
+              size: 30, color: mainGrey),
         ],
         color: mainCyan,
         buttonBackgroundColor: mainCyan,
@@ -52,7 +51,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (index) {
-        navController.selectedIndex = index;
+          navController.selectedIndex = index;
         },
         letIndexChange: (index) => true,
       ),

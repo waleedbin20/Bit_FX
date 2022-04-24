@@ -1,4 +1,3 @@
-
 import 'package:bitfx_application/viewmodels/welcome/welcome_view_model.dart';
 import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,11 +15,6 @@ class WelcomeView extends StatefulWidget {
   _WelcomeViewState createState() => _WelcomeViewState();
 }
 
-// Button button = new Button(
-//   textValue: "Sign Up",
-//   onPressed: () {},
-// );
-
 class _WelcomeViewState extends State<WelcomeView> {
   @override
   Widget build(BuildContext context) {
@@ -29,21 +23,24 @@ class _WelcomeViewState extends State<WelcomeView> {
       builder: (context, viewModel, child) => SafeArea(
         child: Padding(
           padding:
-              const EdgeInsets.only(top: 10, right: 10, left: 10, bottom: 5),
+              const EdgeInsets.only(top: 0, right: 10, left: 10, bottom: 130),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: Expanded(
-                  child: DropShadowImage(
-                      image: Image.asset('assets/icon/icon.png',),
-                    borderRadius: 10,
-                    blurRadius: 4,
-                    offset: Offset(1, 1),
-                    scale: 1,
+              //height: MediaQuery.of(context).size.height * 0.5,
+              Expanded(
+                flex: 2,
+                child: DropShadowImage(
+                  image: Image.asset(
+                    'assets/icon/icon.png',
                   ),
+                  borderRadius: 10,
+                  blurRadius: 4,
+                  offset: Offset(1, 1),
+                  scale: 1,
                 ),
               ),
+
               Text(
                 "Taking you with us to the stairway to success",
                 style: GoogleFonts.antic(

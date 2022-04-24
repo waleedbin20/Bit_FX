@@ -1,0 +1,40 @@
+{
+    "project_info": {
+        "project_number": "346717975430",
+        "project_id": "bitfx-3bb83",
+        "storage_bucket": "bitfx-3bb83.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:346717975430:android:a17ee2c4d070b61a33f207",
+            "android_client_info": {
+                "package_name": "com.example.bitfx_application"
+            }
+        },
+        "oauth_client": [{
+                "client_id": "346717975430-sl9ks6cb0iks93sp6k27mcmvb30l8pap.apps.googleusercontent.com",
+                "client_type": 1,
+                "android_info": {
+                    "package_name": "com.example.bitfx_application",
+                    "certificate_hash": "3f64002b4c82705ab1f2cab01d410d1f98a77a51"
+                }
+            },
+            {
+                "client_id": "346717975430-vbohb9luk2daclsbs041p02rsfai2tvb.apps.googleusercontent.com",
+                "client_type": 3
+            }
+        ],
+        "api_key": [{
+            "current_key": "AIzaSyA0EqWBOzOIzQaUOiLS736e3M-pqXgkOC4"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "346717975430-vbohb9luk2daclsbs041p02rsfai2tvb.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}

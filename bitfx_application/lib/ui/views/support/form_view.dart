@@ -49,8 +49,8 @@ class _FormViewState extends State<FormView> {
                     ),
                     Button(
                         textValue: "Submit",
-                        onPressed: () {
-                          sendEmail();
+                        onPressed: () async {
+                          await sendEmail();
                         })
                   ],
                 ),
@@ -59,7 +59,7 @@ class _FormViewState extends State<FormView> {
   }
 }
 
-void sendEmail() async {
+Future<void> sendEmail() async {
   final user = await AuthService.SignIn();
 
   if (user == null) return;

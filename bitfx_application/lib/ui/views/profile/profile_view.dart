@@ -3,6 +3,9 @@ import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/ui/widgets/profile_menu.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -12,6 +15,23 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+
+  final ImagePicker _picker = ImagePicker();
+ XFile? _imageFile;
+
+
+ ImagePreview() {
+    return SizedBox.expand(
+      child: FittedBox(
+        fit: BoxFit.fitHeight,
+        child: Image.file(
+          File(_imageFile?.path ?? ""),
+          fit: BoxFit.fitHeight,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,18 +46,22 @@ class _ProfileViewState extends State<ProfileView> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.06),
 
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              circleimage(context),
+              imageProfile(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
               ProfileMenu(
                 text: "My Account",
                 icon: "assets/icon/icon.png",
-                press: () => {},
+                press: () => {
+
+                },
               ),
               ProfileMenu(
                 text: "Follow US",
                 icon: "assets/icon/icon.png",
-                press: () => {},
+                press: () => {
+Navigator.pushNamed(context, RoutePaths.followUs)
+                },
               ),
               ProfileMenu(
                 text: "Support",
@@ -48,7 +72,9 @@ class _ProfileViewState extends State<ProfileView> {
               ProfileMenu(
                 text: "Privacy",
                 icon: "assets/icon/icon.png",
-                press: () => {},
+                press: () => {
+                  launch('https://bitfxcoachables.com/privacy-policy/')
+                },
               ),
 
               // supportIcon(context),
@@ -65,7 +91,6 @@ class _ProfileViewState extends State<ProfileView> {
       )),
     );
   }
-}
 
 Widget circleimage(context) {
   return SizedBox(
@@ -99,4 +124,95 @@ Widget circleimage(context) {
       ],
     ),
   );
+
+  
+}
+
+ Widget imageProfile() {
+    return Center(
+      child: Stack(children: <Widget>[
+        InkWell(
+  child: CircleAvatar(
+    backgroundColor: Colors.black,
+    radius: 80.0,
+    child: CircleAvatar(
+      radius: 100.0,
+      child: ClipOval(
+        child: (_imageFile != null)
+        ? ImagePreview()
+        : Image.asset('assets/icon/icon.png'),
+      ),
+      backgroundColor: Colors.white,
+    ),
+  ),
+        ),
+        Positioned(
+          bottom: 20.0,
+          right: 20.0,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: ((builder) => bottomSheet()),
+              );
+            },
+            child: Icon(
+              Icons.camera_alt,
+              color: Colors.teal,
+              size: 28.0,
+            ),
+          ),
+        ),
+      ]),
+    );
+  }
+
+  Widget bottomSheet() {
+    return Container(
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            "Choose Profile photo",
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            TextButton.icon(
+              icon: Icon(Icons.camera),
+              onPressed: () {
+                takePhoto(ImageSource.camera);
+              },
+              label: Text("Camera"),
+            ),
+            TextButton.icon(
+              icon: Icon(Icons.image),
+              onPressed: () {
+                takePhoto(ImageSource.gallery);
+              },
+              label: Text("Gallery"),
+            ),
+          ])
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source) async {
+          final XFile? pickedFile =
+          await _picker.pickImage(source: source);
+      setState(() {
+        _imageFile = pickedFile;
+      });
+
+  }
 }

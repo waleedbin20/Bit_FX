@@ -12,4 +12,6 @@ class RoutePaths {
   static const String profilePage = "profilePage";
   static const String bottomNavBar = "bottomNavBar";
   static const String formPage = "formPage";
+  static const String followUs = "followUs";
+
 }

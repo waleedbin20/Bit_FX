@@ -3,9 +3,9 @@ import 'package:bitfx_application/ui/widgets/route_paths.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:get/get.dart';
 import 'router.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

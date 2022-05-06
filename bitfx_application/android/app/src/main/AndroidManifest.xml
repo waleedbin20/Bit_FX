@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bitfx_application">
+    package="io.bitfx.bitfx_application">
    <application
         android:label="Bitfx"
         android:name="${applicationName}"

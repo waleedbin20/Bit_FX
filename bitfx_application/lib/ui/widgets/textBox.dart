@@ -6,12 +6,14 @@ class TextBoxWidget extends StatelessWidget {
   final String text;
   final String errorMessage;
   final Widget iconDesign;
+  final TextEditingController controller;
 
   const TextBoxWidget(
       {Key? key,
       required this.text,
       required this.errorMessage,
-      required this.iconDesign})
+      required this.iconDesign,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class TextBoxWidget extends StatelessWidget {
           ],
         ),
         child: TextFormField(
+          controller: controller,
           validator: (value) {
             if (value!.isEmpty) {
               return '$errorMessage';

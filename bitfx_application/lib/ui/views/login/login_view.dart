@@ -1,4 +1,5 @@
 
+import 'package:bitfx_application/core/services/auth_service.dart';
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
@@ -18,7 +19,9 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +47,7 @@ class _LoginViewState extends State<LoginView> {
           Padding(
               padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextBoxWidget(
+                controller: email,
                 text: "Email",
                 iconDesign: Icon(
                   Icons.email,
@@ -54,6 +58,7 @@ class _LoginViewState extends State<LoginView> {
           Padding(
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
               child: TextBoxWidget(
+                controller: password,
                 text: "Password",
                 iconDesign: Icon(
                   Icons.vpn_key,
@@ -69,7 +74,22 @@ class _LoginViewState extends State<LoginView> {
               child: Button(
                   textValue: "Login",
                   onPressed: () {
-                    Navigator.pushNamed(context, RoutePaths.bottomNavBar);
+
+                    AuthenticationService()
+                  .signIn(
+                email: email.text.trim(),
+                password: password.text.trim(),
+              )
+                  .then((value) {
+                if (value) {
+                 Navigator.pushNamed(context, RoutePaths.bottomNavBar);
+                } else {
+                  var snackBar =
+                      SnackBar(content: Text('Credentials Not Matched'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              });
+                   
                   })),
           SizedBox(
             height: 20,

@@ -49,44 +49,12 @@ class _FormViewState extends State<FormView> {
                     ),
                     Button(
                         textValue: "Submit",
-                        onPressed: () async {
-                          await sendEmail();
+                        onPressed: () {
+                          //TO-DO
                         })
                   ],
                 ),
               ))),
     );
-  }
-}
-
-Future<void> sendEmail() async {
-  final user = await AuthService.SignIn();
-
-  if (user == null) return;
-  final email = user.email;
-  final auth = await user.authentication;
-  final token = auth.accessToken;
-
-  print('Authenticated: $email');
-
-  AuthService.SignOut();
-  final smtpServer = gmailSaslXoauth2(email, token!);
-
-  // Create our message.
-  final message = Message()
-    ..from = Address(email, 'Rockyy')
-    ..recipients.add('waleed.binasad19@gmail.com')
-    ..ccRecipients.addAll(['waleed.binasad19@gmail.com'])
-    ..subject = 'This is a test email :: 😀 :: ${DateTime.now()}'
-    ..text = 'Hello, Thank you for contacting me.\nWelcome to my course.';
-
-  try {
-    final sendReport = await send(message, smtpServer);
-    print('Message sent: ' + sendReport.toString());
-  } on MailerException catch (e) {
-    print('Message not sent.');
-    for (var p in e.problems) {
-      print('Problem: ${p.code}: ${p.msg}');
-    }
   }
 }

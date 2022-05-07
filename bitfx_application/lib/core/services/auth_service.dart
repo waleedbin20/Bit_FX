@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -31,25 +29,25 @@ class AuthenticationService {
   }
 
 //SIgnup and create users credentials in firestore
-  Future<bool> signUp(
-      {String? name,
-      String? email,
-      String? password,
-      String? confirmPass,
-      }) async {
+  Future<bool> signUp({
+    String? name,
+    String? email,
+    String? password,
+    String? confirmPass,
+  }) async {
     try {
-      UserCredential userCred = await _firebaseAuth
-          .createUserWithEmailAndPassword(email: email as String, password: password as String);
+      UserCredential userCred =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+              email: email as String, password: password as String);
       if (userCred.user != null) {
         await _firebaseFirestore
             .collection("userData")
             .doc(userCred.user!.email)
             .set({
-              "name" : name,
+          "name": name,
           "email": userCred.user?.email,
-          "password" : password,
-          "confirmpassword" : confirmPass,
-         
+          "password": password,
+          "confirmpassword": confirmPass,
         });
         //return true;
       } else {
@@ -57,7 +55,7 @@ class AuthenticationService {
       }
       return true;
     } on FirebaseAuthException catch (e) {
-       print("[FirebaseService] inside siginUp Exception is : $e");
+      print("[FirebaseService] inside siginUp Exception is : $e");
       return false;
     }
   }

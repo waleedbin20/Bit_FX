@@ -73,10 +73,16 @@ class _SignupViewState extends State<SignupView> {
                   errorMessage: 'Enter your email',
                   obsureText: false,
                   validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Enter your email';
+                    if (val!.isNotEmpty) {
+                      final RegExp regex = RegExp(
+                          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)| (\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+                      if (!regex.hasMatch(val))
+                        return 'Enter a valid email';
+                      else
+                        return null;
+                    } else {
+                      return 'Enter a valid email';
                     }
-                    return null;
                   },
                 ),
               ),

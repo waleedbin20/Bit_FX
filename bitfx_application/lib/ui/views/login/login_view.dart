@@ -1,4 +1,3 @@
-
 import 'package:bitfx_application/core/services/auth_service.dart';
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
@@ -18,10 +17,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +52,7 @@ class _LoginViewState extends State<LoginView> {
                   color: mainCyan,
                 ),
                 errorMessage: 'Enter your email',
+                obsureText: false,
               )),
           Padding(
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
@@ -65,53 +64,55 @@ class _LoginViewState extends State<LoginView> {
                   color: mainCyan,
                 ),
                 errorMessage: 'Enter your password',
+                obsureText: true,
               )),
           SizedBox(
             height: 20,
           ),
           Padding(
-              padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
-              child: Button(
-                  textValue: "Login",
-                  onPressed: () {
-
-                    AuthenticationService()
-                  .signIn(
-                email: email.text.trim(),
-                password: password.text.trim(),
-              )
-                  .then((value) {
-                if (value) {
-                 Navigator.pushNamed(context, RoutePaths.bottomNavBar);
-                } else {
-                  var snackBar =
-                      SnackBar(content: Text('Credentials Not Matched'));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              });
-                   
-                  })),
+            padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
+            child: Button(
+              textValue: "Login",
+              onPressed: () {
+                AuthenticationService()
+                    .signIn(
+                  email: email.text.trim(),
+                  password: password.text.trim(),
+                )
+                    .then(
+                  (value) {
+                    if (value) {
+                      Navigator.pushNamed(context, RoutePaths.bottomNavBar);
+                    } else {
+                      var snackBar =
+                          SnackBar(content: Text('Credentials Not Matched'));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    }
+                  },
+                );
+              },
+            ),
+          ),
           SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-             
               Padding(
                 padding: EdgeInsets.fromLTRB(95, 15, 30, 10),
                 child: RichText(
                   text: TextSpan(
-                    text: 'Don\'t have an account? ' ,
+                    text: 'Don\'t have an account? ',
                     style: GoogleFonts.antic(
-                          textStyle:TextStyle(color: mainCyan, fontSize: 15)),
+                        textStyle: TextStyle(color: mainCyan, fontSize: 15)),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'SIGNUP',
                         style: GoogleFonts.antic(
-                          textStyle: TextStyle(                        
-                            fontWeight: FontWeight.bold, color: mainCyan),
-                        ),               
+                          textStyle: TextStyle(
+                              fontWeight: FontWeight.bold, color: mainCyan),
+                        ),
                         recognizer: new TapGestureRecognizer()
                           ..onTap = () =>
                               Navigator.pushNamed(context, RoutePaths.signup),

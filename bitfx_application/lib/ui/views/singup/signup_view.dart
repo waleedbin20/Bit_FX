@@ -2,6 +2,7 @@ import 'package:bitfx_application/core/services/auth_service.dart';
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/viewmodels/login/login_view_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -49,6 +50,7 @@ class _SignupViewState extends State<SignupView> {
                   color: mainCyan,
                 ),
                 errorMessage: 'Enter your name',
+                obsureText: false,
               ),
             ),
             Padding(
@@ -61,6 +63,7 @@ class _SignupViewState extends State<SignupView> {
                   color: mainCyan,
                 ),
                 errorMessage: 'Enter your email',
+                obsureText: false,
               ),
             ),
             Padding(
@@ -73,6 +76,7 @@ class _SignupViewState extends State<SignupView> {
                     color: mainCyan,
                   ),
                   errorMessage: 'Enter your password',
+                  obsureText: true,
                 )),
             Padding(
                 padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
@@ -84,34 +88,41 @@ class _SignupViewState extends State<SignupView> {
                     color: mainCyan,
                   ),
                   errorMessage: '',
+                  obsureText: true,
                 )),
             SizedBox(
               height: 19,
             ),
             Padding(
-                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
-                child: Button(
-                    textValue: "Signup",
-                    onPressed: () {
-                      AuthenticationService()
-                          .signUp(
-                        name: name.text.trim(),
-                        email: email.text.trim(),
-                        password: password.text.trim(),
-                        confirmPass: confirmpass.text.trim(),
-                      )
-                          .then((value) {
-                        if (value) {
-                          print('value is true');
-                          Navigator.pushNamed(context, RoutePaths.signup);
-                        } else {
-                          print('value is false');
-                          var snackBar = SnackBar(
-                              content: Text('Please fill the form correclty'));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      });
-                    })),
+              padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
+              child: Button(
+                textValue: "Signup",
+                onPressed: () {
+                  AuthenticationService()
+                      .signUp(
+                    name: name.text.trim(),
+                    email: email.text.trim(),
+                    password: password.text.trim(),
+                    confirmPass: confirmpass.text.trim(),
+                  )
+                      .then(
+                    (value) {
+                      if (value) {
+                        print('value is true');
+                        Navigator.pushNamed(context, RoutePaths.bottomNavBar);
+                        AuthenticationService().sendEmailVerification();
+                      } else {
+                        print('value is false');
+                        var snackBar = SnackBar(
+                            content: Text(
+                                'The email already exists. Please try again with a different account.'));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
             SizedBox(
               height: 15,
             ),

@@ -12,6 +12,16 @@ class AuthenticationService {
     await _firebaseAuth.signOut();
   }
 
+// Send Email Verification
+  Future<void> sendEmailVerification() async {
+    try {
+      final user = _firebaseAuth.currentUser!;
+      await user.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      print("[FirebaseService] Email verification exception : $e");
+    }
+  }
+
 //Sign In authentication
   Future<bool> signIn({String? email, String? password}) async {
     try {

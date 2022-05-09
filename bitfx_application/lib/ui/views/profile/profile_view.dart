@@ -1,7 +1,12 @@
+import 'dart:developer';
+
+import 'package:bitfx_application/core/services/auth_service.dart';
 import 'package:bitfx_application/ui/colors/button_color.dart';
+import 'package:bitfx_application/ui/colors/cyan.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
 import 'package:bitfx_application/ui/widgets/profile_menu.dart';
 import 'package:bitfx_application/ui/widgets/route_paths.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,12 +20,11 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-
   final ImagePicker _picker = ImagePicker();
- XFile? _imageFile;
+  XFile? _imageFile;
+  final user = FirebaseAuth.instance.currentUser!;
 
-
- ImagePreview() {
+  ImagePreview() {
     return SizedBox.expand(
       child: FittedBox(
         fit: BoxFit.fitHeight,
@@ -47,21 +51,23 @@ class _ProfileViewState extends State<ProfileView> {
 
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               imageProfile(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              Text(
+                user.email!,
+                style: TextStyle(fontSize: 17, color: cyan),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
               ProfileMenu(
                 text: "My Account",
                 icon: "assets/icon/icon.png",
-                press: () => {
-
-                },
+                press: () => {},
               ),
               ProfileMenu(
                 text: "Follow US",
                 icon: "assets/icon/icon.png",
-                press: () => {
-Navigator.pushNamed(context, RoutePaths.followUs)
-                },
+                press: () =>
+                    {Navigator.pushNamed(context, RoutePaths.followUs)},
               ),
               ProfileMenu(
                 text: "Support",
@@ -72,18 +78,25 @@ Navigator.pushNamed(context, RoutePaths.followUs)
               ProfileMenu(
                 text: "Privacy",
                 icon: "assets/icon/icon.png",
-                press: () => {
-                  launch('https://bitfxcoachables.com/privacy-policy/')
-                },
+                press: () =>
+                    {launch('https://bitfxcoachables.com/privacy-policy/')},
               ),
 
               // supportIcon(context),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+
               Button(
-                  textValue: "Log Out",
-                  onPressed: () {
-                    Navigator.pushNamed(context, RoutePaths.login);
-                  }),
+                textValue: "Log Out",
+                onPressed: () {
+                  AuthenticationService().signOut();
+
+                  Navigator.pushNamed(context, RoutePaths.login);
+                  var snackBar = SnackBar(
+                      content: Text('You have successfully logged out'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+              ),
+
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],
           ),
@@ -92,59 +105,57 @@ Navigator.pushNamed(context, RoutePaths.followUs)
     );
   }
 
-Widget circleimage(context) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.width * 0.4,
-    width: MediaQuery.of(context).size.height * 0.4,
-    // height: 300,
-    // width: 200,
-    child: Stack(
-      clipBehavior: Clip.none,
-      fit: StackFit.expand,
-      children: [
-        CircleAvatar(
-          backgroundColor: mainCyan,
-        ),
-        Positioned(
-            bottom: MediaQuery.of(context).size.width * 0,
-            right: MediaQuery.of(context).size.height * 0.1,
-            // bottom: 0,
-            // right: -25,
-            child: RawMaterialButton(
-              onPressed: () {},
-              elevation: 2.0,
-              fillColor: Color(0xFFF5F6F9),
-              child: Icon(
-                Icons.camera_alt_outlined,
-                color: Colors.blue,
-              ),
-              padding: EdgeInsets.all(15.0),
-              shape: CircleBorder(),
-            )),
-      ],
-    ),
-  );
+  Widget circleimage(context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.width * 0.4,
+      width: MediaQuery.of(context).size.height * 0.4,
+      // height: 300,
+      // width: 200,
+      child: Stack(
+        clipBehavior: Clip.none,
+        fit: StackFit.expand,
+        children: [
+          CircleAvatar(
+            backgroundColor: mainCyan,
+          ),
+          Positioned(
+              bottom: MediaQuery.of(context).size.width * 0,
+              right: MediaQuery.of(context).size.height * 0.1,
+              // bottom: 0,
+              // right: -25,
+              child: RawMaterialButton(
+                onPressed: () {},
+                elevation: 2.0,
+                fillColor: Color(0xFFF5F6F9),
+                child: Icon(
+                  Icons.camera_alt_outlined,
+                  color: Colors.blue,
+                ),
+                padding: EdgeInsets.all(15.0),
+                shape: CircleBorder(),
+              )),
+        ],
+      ),
+    );
+  }
 
-  
-}
-
- Widget imageProfile() {
+  Widget imageProfile() {
     return Center(
       child: Stack(children: <Widget>[
         InkWell(
-  child: CircleAvatar(
-    backgroundColor: Colors.black,
-    radius: 80.0,
-    child: CircleAvatar(
-      radius: 100.0,
-      child: ClipOval(
-        child: (_imageFile != null)
-        ? ImagePreview()
-        : Image.asset('assets/icon/icon.png'),
-      ),
-      backgroundColor: Colors.white,
-    ),
-  ),
+          child: CircleAvatar(
+            backgroundColor: Colors.black,
+            radius: 80.0,
+            child: CircleAvatar(
+              radius: 100.0,
+              child: ClipOval(
+                child: (_imageFile != null)
+                    ? ImagePreview()
+                    : Image.asset('assets/icon/icon.png'),
+              ),
+              backgroundColor: Colors.white,
+            ),
+          ),
         ),
         Positioned(
           bottom: 20.0,
@@ -208,11 +219,9 @@ Widget circleimage(context) {
   }
 
   void takePhoto(ImageSource source) async {
-          final XFile? pickedFile =
-          await _picker.pickImage(source: source);
-      setState(() {
-        _imageFile = pickedFile;
-      });
-
+    final XFile? pickedFile = await _picker.pickImage(source: source);
+    setState(() {
+      _imageFile = pickedFile;
+    });
   }
 }

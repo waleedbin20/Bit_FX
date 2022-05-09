@@ -1,4 +1,3 @@
-
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +5,7 @@ class TextBoxWidget extends StatelessWidget {
   final String text;
   final String errorMessage;
   final Widget iconDesign;
+  final bool obsureText;
   final TextEditingController controller;
 
   const TextBoxWidget(
@@ -13,7 +13,8 @@ class TextBoxWidget extends StatelessWidget {
       required this.text,
       required this.errorMessage,
       required this.iconDesign,
-      required this.controller})
+      required this.controller,
+      required this.obsureText})
       : super(key: key);
 
   @override
@@ -31,7 +32,6 @@ class TextBoxWidget extends StatelessWidget {
               color: mainCyan,
               spreadRadius: 1,
               blurRadius: 3,
-
             ),
           ],
         ),
@@ -47,14 +47,16 @@ class TextBoxWidget extends StatelessWidget {
           style: TextStyle(color: Colors.white),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            isDense: true,
-            filled: true,
-            fillColor: black,
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
-            prefixIcon: iconDesign,
-            hintText: '$text',
-            hintStyle: TextStyle(color: mainCyan)
-          ),
+              isDense: true,
+              filled: true,
+              fillColor: black,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide.none),
+              prefixIcon: iconDesign,
+              hintText: '$text',
+              hintStyle: TextStyle(color: mainCyan)),
+          obscureText: obsureText,
         ),
       ),
     );

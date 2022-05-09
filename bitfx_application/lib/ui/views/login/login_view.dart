@@ -107,7 +107,8 @@ class _LoginViewState extends State<LoginView> {
                           Navigator.pushNamed(context, RoutePaths.bottomNavBar);
                         } else {
                           var snackBar = SnackBar(
-                              content: Text('Credentials Not Matched'));
+                              content: Text(
+                                  'Credentials do not Match. Please try again!'));
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },

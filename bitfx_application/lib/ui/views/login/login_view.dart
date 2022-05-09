@@ -19,30 +19,33 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
-            child: DropShadowImage(
-              image: Image.asset(
-                'assets/icon/icon.png',
-                width: 120,
-                height: 120,
-                color: mainCyan,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
+              child: DropShadowImage(
+                image: Image.asset(
+                  'assets/icon/icon.png',
+                  width: 120,
+                  height: 120,
+                  color: mainCyan,
+                ),
+                borderRadius: 0,
+                blurRadius: 0,
+                offset: Offset(1, 1),
+                scale: 0,
               ),
-              borderRadius: 0,
-              blurRadius: 0,
-              offset: Offset(1, 1),
-              scale: 0,
             ),
-          ),
-          Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: TextBoxWidget(
                 controller: email,
@@ -53,8 +56,15 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 errorMessage: 'Enter your email',
                 obsureText: false,
-              )),
-          Padding(
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter your email';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
               padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
               child: TextBoxWidget(
                 controller: password,
@@ -65,65 +75,74 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 errorMessage: 'Enter your password',
                 obsureText: true,
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
-            child: Button(
-              textValue: "Login",
-              onPressed: () {
-                AuthenticationService()
-                    .signIn(
-                  email: email.text.trim(),
-                  password: password.text.trim(),
-                )
-                    .then(
-                  (value) {
-                    if (value) {
-                      Navigator.pushNamed(context, RoutePaths.bottomNavBar);
-                    } else {
-                      var snackBar =
-                          SnackBar(content: Text('Credentials Not Matched'));
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
-                  },
-                );
-              },
+                validator: (val) {
+                  if (val!.isEmpty) return 'Enter your password';
+                  return null;
+                },
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.fromLTRB(95, 15, 30, 10),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Don\'t have an account? ',
-                    style: GoogleFonts.antic(
-                        textStyle: TextStyle(color: mainCyan, fontSize: 15)),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'SIGNUP',
-                        style: GoogleFonts.antic(
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.bold, color: mainCyan),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(30, 5, 30, 10),
+              child: Button(
+                textValue: "Login",
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    AuthenticationService()
+                        .signIn(
+                      email: email.text.trim(),
+                      password: password.text.trim(),
+                    )
+                        .then(
+                      (value) {
+                        if (value) {
+                          Navigator.pushNamed(context, RoutePaths.bottomNavBar);
+                        } else {
+                          var snackBar = SnackBar(
+                              content: Text('Credentials Not Matched'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                    );
+                  }
+                  ;
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(95, 15, 30, 10),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Don\'t have an account? ',
+                      style: GoogleFonts.antic(
+                          textStyle: TextStyle(color: mainCyan, fontSize: 15)),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'SIGNUP',
+                          style: GoogleFonts.antic(
+                            textStyle: TextStyle(
+                                fontWeight: FontWeight.bold, color: mainCyan),
+                          ),
+                          recognizer: new TapGestureRecognizer()
+                            ..onTap = () =>
+                                Navigator.pushNamed(context, RoutePaths.signup),
                         ),
-                        recognizer: new TapGestureRecognizer()
-                          ..onTap = () =>
-                              Navigator.pushNamed(context, RoutePaths.signup),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
-          ),
-        ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
       backgroundColor: Colors.black,
     );

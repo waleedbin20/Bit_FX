@@ -21,64 +21,84 @@ class _SignupViewState extends State<SignupView> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmpass = TextEditingController();
-
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
       builder: (context, viewModel, child) => Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
-              child: Image(
-                image: AssetImage('assets/icon/icon.png'),
-                height: 120,
-                width: 120,
-                color: mainCyan,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(50, 10, 30, 10),
-              child: TextBoxWidget(
-                controller: name,
-                text: "Name",
-                iconDesign: Icon(
-                  Icons.verified_user,
+        body: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(40, 130, 30, 10),
+                child: Image(
+                  image: AssetImage('assets/icon/icon.png'),
+                  height: 120,
+                  width: 120,
                   color: mainCyan,
                 ),
-                errorMessage: 'Enter your name',
-                obsureText: false,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
-              child: TextBoxWidget(
-                controller: email,
-                text: "Email",
-                iconDesign: Icon(
-                  Icons.email,
-                  color: mainCyan,
-                ),
-                errorMessage: 'Enter your email',
-                obsureText: false,
-              ),
-            ),
-            Padding(
-                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50, 10, 30, 10),
                 child: TextBoxWidget(
-                  controller: password,
-                  text: "Password",
+                  controller: name,
+                  text: "Name",
                   iconDesign: Icon(
-                    Icons.vpn_key,
+                    Icons.verified_user,
                     color: mainCyan,
                   ),
-                  errorMessage: 'Enter your password',
-                  obsureText: true,
-                )),
-            Padding(
+                  errorMessage: 'Enter your name',
+                  obsureText: false,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Enter your name';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
+                child: TextBoxWidget(
+                  controller: email,
+                  text: "Email",
+                  iconDesign: Icon(
+                    Icons.email,
+                    color: mainCyan,
+                  ),
+                  errorMessage: 'Enter your email',
+                  obsureText: false,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Enter your email';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
+                  child: TextBoxWidget(
+                    controller: password,
+                    text: "Password",
+                    iconDesign: Icon(
+                      Icons.vpn_key,
+                      color: mainCyan,
+                    ),
+                    errorMessage: 'Enter your password',
+                    obsureText: true,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return 'Enter your password';
+                      }
+                      return null;
+                    },
+                  )),
+              Padding(
                 padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
                 child: TextBoxWidget(
                   controller: confirmpass,
@@ -89,63 +109,76 @@ class _SignupViewState extends State<SignupView> {
                   ),
                   errorMessage: '',
                   obsureText: true,
-                )),
-            SizedBox(
-              height: 19,
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
-              child: Button(
-                textValue: "Signup",
-                onPressed: () {
-                  AuthenticationService()
-                      .signUp(
-                    name: name.text.trim(),
-                    email: email.text.trim(),
-                    password: password.text.trim(),
-                    confirmPass: confirmpass.text.trim(),
-                  )
-                      .then(
-                    (value) {
-                      if (value) {
-                        print('value is true');
-                        Navigator.pushNamed(context, RoutePaths.bottomNavBar);
-                        AuthenticationService().sendEmailVerification();
-                      } else {
-                        print('value is false');
-                        var snackBar = SnackBar(
-                            content: Text(
-                                'The email already exists. Please try again with a different account.'));
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    },
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(43, 15, 30, 10),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Have have an account? ',
-                  style: TextStyle(color: mainCyan),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: 'Login',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: mainCyan),
-                      recognizer: new TapGestureRecognizer()
-                        ..onTap = () =>
-                            Navigator.pushNamed(context, RoutePaths.login),
-                    ),
-                  ],
+                  validator: (val) {
+                    if (val!.isEmpty) return 'Enter your password';
+                    if (val != password.text)
+                      return 'The password do not match';
+                    return null;
+                  },
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: 19,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(50, 0, 30, 10),
+                child: Button(
+                  textValue: "Signup",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      print("Validated form");
+                      AuthenticationService()
+                          .signUp(
+                        name: name.text.trim(),
+                        email: email.text.trim(),
+                        password: password.text.trim(),
+                        confirmPass: confirmpass.text.trim(),
+                      )
+                          .then(
+                        (value) {
+                          if (value) {
+                            print('value is true');
+                            Navigator.pushNamed(
+                                context, RoutePaths.bottomNavBar);
+                            AuthenticationService().sendEmailVerification();
+                          } else {
+                            print('value is false');
+                            var snackBar = SnackBar(
+                                content: Text(
+                                    'The email already exists. Please try again with a different account.'));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(43, 15, 30, 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Have have an account? ',
+                    style: TextStyle(color: mainCyan),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Login',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: mainCyan),
+                        recognizer: new TapGestureRecognizer()
+                          ..onTap = () =>
+                              Navigator.pushNamed(context, RoutePaths.login),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
         backgroundColor: Colors.black,
       ),

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-
   Stream<User?> get authStateChanges => _firebaseAuth.idTokenChanges();
 
 //Sign Out
@@ -74,5 +73,13 @@ class AuthenticationService {
   Future<String> resetPassword({String? email}) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email as String);
     return email;
+  }
+
+  bool isSignedIn() {
+    return _firebaseAuth.currentUser != null;
+  }
+
+  String? getEmail() {
+    return _firebaseAuth.currentUser?.email;
   }
 }

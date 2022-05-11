@@ -79,6 +79,8 @@ class _ProfileViewState extends State<ProfileView> {
                 text: "Privacy",
                 icon: "assets/icon/icon.png",
                 press: () =>
+                  
+                    // ignore: deprecated_member_use
                     {launch('https://bitfxcoachables.com/privacy-policy/')},
               ),
 
@@ -89,11 +91,12 @@ class _ProfileViewState extends State<ProfileView> {
                 textValue: "Log Out",
                 onPressed: () {
                   AuthenticationService().signOut();
-
                   Navigator.pushNamed(context, RoutePaths.login);
                   var snackBar = SnackBar(
                       content: Text('You have successfully logged out'));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                  print('not working');
                 },
               ),
 

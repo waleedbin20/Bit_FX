@@ -7,6 +7,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:get/get.dart';
 
 import '../../colors/button_color.dart';
+import '../Signals/signalView.dart';
 import '../login/login_view.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -18,7 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final NavController navController = Get.put(NavController());
 
   List<Widget> bodyContent = [
-    CoursesView(),
+    Signals(),
     LoginView(),
     CalculatorView(),
     EconomicCalendarView(),

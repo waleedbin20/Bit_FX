@@ -1,9 +1,6 @@
-
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bitfx_application/ui/views/welcome/welcome_view.dart';
 import 'package:flutter/material.dart';
-
 import '../../colors/button_color.dart';
 
 class SplashView extends StatefulWidget {

@@ -1,4 +1,5 @@
 import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
+import 'package:bitfx_application/ui/views/courses/Video_view.dart';
 import 'package:bitfx_application/ui/views/courses/courses_view.dart';
 import 'package:bitfx_application/ui/views/profile/profile_view.dart';
 import 'package:bitfx_application/ui/views/calendar/econmic_view.dart';
@@ -20,10 +21,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> bodyContent = [
     Signals(),
-    LoginView(),
+    CoursesView(),
     CalculatorView(),
     EconomicCalendarView(),
-    ProfileView()
+    ProfileView(),
   ];
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 

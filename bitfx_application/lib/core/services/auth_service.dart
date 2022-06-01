@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -82,4 +83,20 @@ class AuthenticationService {
   String? getEmail() {
     return _firebaseAuth.currentUser?.email;
   }
-}
+
+
+  Future<void> uploadimage() async {
+     final user = _firebaseAuth.currentUser!;
+final _uid = user.uid;
+ await  FirebaseFirestore.instance.collection('images').doc(_uid).set({
+'imageUrl' : '',
+  });
+  }
+
+  Future<void> getimageurl( _file) async {
+    String url;
+final ref = FirebaseStorage.instance.ref().child('usersimages').child('.jpg');
+await ref.putFile(_file);
+url = await ref.getDownloadURL();
+  }
+ }

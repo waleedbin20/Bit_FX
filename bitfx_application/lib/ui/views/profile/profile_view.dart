@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bitfx_application/core/services/auth_service.dart';
+import 'package:bitfx_application/core/services/firebase_storage.dart';
 import 'package:bitfx_application/ui/colors/button_color.dart';
 import 'package:bitfx_application/ui/colors/cyan.dart';
 import 'package:bitfx_application/ui/widgets/button.dart';
@@ -20,6 +21,9 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
+
+StorageProviderr _storageProviderr = StorageProviderr();
+
   final ImagePicker _picker = ImagePicker();
   XFile? _imageFile;
   final user = FirebaseAuth.instance.currentUser!;
@@ -58,11 +62,11 @@ class _ProfileViewState extends State<ProfileView> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
-              ProfileMenu(
-                text: "My Account",
-                icon: "assets/icon/icon.png",
-                press: () => {},
-              ),
+              // ProfileMenu(
+              //   text: "My Account",
+              //   icon: "assets/icon/icon.png",
+              //   press: () => {},
+              // ),
               ProfileMenu(
                 text: "Follow US",
                 icon: "assets/icon/icon.png",
@@ -205,6 +209,7 @@ class _ProfileViewState extends State<ProfileView> {
               icon: Icon(Icons.camera),
               onPressed: () {
                 takePhoto(ImageSource.camera);
+              
               },
               label: Text("Camera"),
             ),

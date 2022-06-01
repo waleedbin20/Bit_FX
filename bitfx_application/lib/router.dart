@@ -1,4 +1,6 @@
 import 'package:bitfx_application/ui/views/calculator/calculator_view.dart';
+import 'package:bitfx_application/ui/views/courses/PdfScreen.dart';
+import 'package:bitfx_application/ui/views/courses/Video_view.dart';
 import 'package:bitfx_application/ui/views/home/home_view.dart';
 import 'package:bitfx_application/ui/views/login/login_view.dart';
 import 'package:bitfx_application/ui/views/profile/follow_view.dart';
@@ -48,6 +50,15 @@ class Router {
       case RoutePaths.followUs:
         return MaterialPageRoute(
             builder: (_) => FollowUs(), settings: settings);
+
+      case RoutePaths.videoScreen:
+        return MaterialPageRoute(
+            builder: (_) => VideoScreen(), settings: settings);
+
+            
+      case RoutePaths.pdfScreen:
+        return MaterialPageRoute(
+            builder: (_) => PdfScreen(), settings: settings);
 
       default:
         return MaterialPageRoute(

@@ -13,5 +13,9 @@ class RoutePaths {
   static const String bottomNavBar = "bottomNavBar";
   static const String formPage = "formPage";
   static const String followUs = "followUs";
+  static const String  videoScreen = " videoScreen";
+  static const String  pdfScreen = " PdfScreen";
+
+ 
 
 }
